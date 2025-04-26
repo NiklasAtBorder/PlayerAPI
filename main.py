@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
 from .db.database import create_db
-from .routers import player
+from .routers import player, event
 
 
 @asynccontextmanager
@@ -27,3 +27,4 @@ app.add_middleware(
 )
 
 app.include_router(player.router)
+app.include_router(event.router)
