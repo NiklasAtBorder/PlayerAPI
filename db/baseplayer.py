@@ -2,7 +2,6 @@ from sqlmodel import SQLModel, Field, Relationship
 from datetime import datetime
 
 
-
 class PlayerBase(SQLModel):
     name: str
 
@@ -10,7 +9,7 @@ class PlayerIn(PlayerBase):
     pass
 
 class PlayerDb(PlayerBase, table=True):
-    id: int | None = Field(default=None, primary_key=True)
+    id: int = Field(default=None, primary_key=True)
 
     events: list["EventDb"] = Relationship(back_populates="player")
 
@@ -24,9 +23,9 @@ class EventIn(EventBase):
 
 class EventDb(EventBase, table=True):
     player_id: int = Field(foreign_key="playerdb.id")
-    id: int | None = Field(default=None, primary_key=True)
+    id: int = Field(default=None, primary_key=True)
 
-    player: PlayerDb | None = Relationship(back_populates="events")
+    player: PlayerDb = Relationship(back_populates="events")
     
     
     
